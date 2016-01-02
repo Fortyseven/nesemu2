@@ -318,19 +318,19 @@
     <ClInclude Include="source\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\system\sdl\console\console.h">
+    <ClInclude Include="source\system\gamepak\console\console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\system\sdl\console\font.h">
+    <ClInclude Include="source\system\gamepak\console\font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\system\sdl\console\fontdata.h">
+    <ClInclude Include="source\system\gamepak\console\fontdata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\system\sdl\console\linebuffer.h">
+    <ClInclude Include="source\system\gamepak\console\linebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\system\sdl\osx\SDLMain.h">
+    <ClInclude Include="source\system\gamepak\osx\SDLMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -998,34 +998,34 @@
     <ClCompile Include="source\system\linux\stricmp.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\console\console.c">
+    <ClCompile Include="source\system\gamepak\console\console.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\console\font.c">
+    <ClCompile Include="source\system\gamepak\console\font.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\console\fontdata.c">
+    <ClCompile Include="source\system\gamepak\console\fontdata.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\console\linebuffer.c">
+    <ClCompile Include="source\system\gamepak\console\linebuffer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\win32\SDL_win32_main.c">
+    <ClCompile Include="source\system\gamepak\win32\SDL_win32_main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\input.c">
+    <ClCompile Include="source\system\gamepak\input.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\main.c">
+    <ClCompile Include="source\system\gamepak\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\sound.c">
+    <ClCompile Include="source\system\gamepak\sound.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\system.c">
+    <ClCompile Include="source\system\gamepak\system.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\sdl\video.c">
+    <ClCompile Include="source\system\gamepak\video.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

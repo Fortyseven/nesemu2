@@ -113,13 +113,13 @@
     <ClInclude Include="source\system\common\filters\scale2x\scale3x.h" />
     <ClInclude Include="source\system\common\filters\scale2x\scalebit.h" />
     <ClInclude Include="source\system\common\SDL_keysym.h" />
+    <ClInclude Include="source\system\gamepak\console\console.h" />
+    <ClInclude Include="source\system\gamepak\console\font.h" />
+    <ClInclude Include="source\system\gamepak\console\fontdata.h" />
+    <ClInclude Include="source\system\gamepak\console\linebuffer.h" />
+    <ClInclude Include="source\system\gamepak\osx\SDLMain.h" />
     <ClInclude Include="source\system\input.h" />
     <ClInclude Include="source\system\main.h" />
-    <ClInclude Include="source\system\sdl\console\console.h" />
-    <ClInclude Include="source\system\sdl\console\font.h" />
-    <ClInclude Include="source\system\sdl\console\fontdata.h" />
-    <ClInclude Include="source\system\sdl\console\linebuffer.h" />
-    <ClInclude Include="source\system\sdl\osx\SDLMain.h" />
     <ClInclude Include="source\system\sound.h" />
     <ClInclude Include="source\system\system.h" />
     <ClInclude Include="source\system\video.h" />
@@ -347,17 +347,17 @@
     <ClCompile Include="source\system\common\filters\scale2x\scale2x.c" />
     <ClCompile Include="source\system\common\filters\scale2x\scale3x.c" />
     <ClCompile Include="source\system\common\filters\scale2x\scalebit.c" />
+    <ClCompile Include="source\system\gamepak\console\console.c" />
+    <ClCompile Include="source\system\gamepak\console\font.c" />
+    <ClCompile Include="source\system\gamepak\console\fontdata.c" />
+    <ClCompile Include="source\system\gamepak\console\linebuffer.c" />
+    <ClCompile Include="source\system\gamepak\input.c" />
+    <ClCompile Include="source\system\gamepak\main.c" />
+    <ClCompile Include="source\system\gamepak\sound.c" />
+    <ClCompile Include="source\system\gamepak\system.c" />
+    <ClCompile Include="source\system\gamepak\video.c" />
+    <ClCompile Include="source\system\gamepak\win32\SDL_win32_main.c" />
     <ClCompile Include="source\system\linux\stricmp.c" />
-    <ClCompile Include="source\system\sdl\console\console.c" />
-    <ClCompile Include="source\system\sdl\console\font.c" />
-    <ClCompile Include="source\system\sdl\console\fontdata.c" />
-    <ClCompile Include="source\system\sdl\console\linebuffer.c" />
-    <ClCompile Include="source\system\sdl\input.c" />
-    <ClCompile Include="source\system\sdl\main.c" />
-    <ClCompile Include="source\system\sdl\sound.c" />
-    <ClCompile Include="source\system\sdl\system.c" />
-    <ClCompile Include="source\system\sdl\video.c" />
-    <ClCompile Include="source\system\sdl\win32\SDL_win32_main.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{36DC9E95-FFA7-4747-BC31-806B22FC61E3}</ProjectGuid>
