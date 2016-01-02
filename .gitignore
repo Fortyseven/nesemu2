@@ -25,3 +25,5 @@ projects/vc2012/ipch
 test/
 resources/old/
 .DS_Store
+Debug/
+Release/
