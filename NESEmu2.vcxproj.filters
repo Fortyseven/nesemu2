@@ -333,6 +333,9 @@
     <ClInclude Include="source\system\gamepak\osx\SDLMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\system\gamepak\sdl2video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cartdb\expat\xmlparse.c">
@@ -1010,7 +1013,7 @@
     <ClCompile Include="source\system\gamepak\console\linebuffer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\system\gamepak\win32\SDL_win32_main.c">
+    <ClCompile Include="source\system\gamepak\sdl2video.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\system\gamepak\input.c">

@@ -21,6 +21,7 @@
 #ifndef __video_h__
 #define __video_h__
 
+#include "memory.h"
 #include "palette/palette.h"
 
 int video_init();
