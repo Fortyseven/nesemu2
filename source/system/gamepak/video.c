@@ -30,7 +30,7 @@
 #include "misc/config.h"
 #include "system/common/filters.h"
 
-//system related variables
+ //system related variables
 static int screenw, screenh, screenbpp;
 static int screenscale;
 

@@ -84,7 +84,7 @@ int main( int argc, char *argv[] )
     }
 
     if ( argc == 1 ) {
-        usage(argv[0]);
+        usage( argv[ 0 ] );
         return 0;
     }
 
@@ -157,12 +157,13 @@ int main( int argc, char *argv[] )
     }
 
     //begin automated tests
-    if ( strcmp( testfilename, "" ) != 0 )
+    if ( strcmp( testfilename, "" ) != 0 ) {
         ret = emu_mainloop_test( testfilename );
-
+    }
     //or begin the main loop
-    else
+    else {
         ret = emu_mainloop();
+    }
 
     //destroy emulator
     emu_kill();
