@@ -50,8 +50,7 @@ int system_init()
 
 void system_kill()
 {
-    sdl2video_closeJoystick();        
-    SDL_Quit();
+    sdl2video_done();
 }
 
 #define bit(n)	(1 << (n))

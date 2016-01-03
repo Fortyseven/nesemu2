@@ -94,62 +94,6 @@ static int absolute_value( int v )
     return( ( v < 0 ) ? ( 0 - v ) : v );
 }
 
-//int find_video_mode( int wantw, int wanth, int flags2, int *w, int *h )
-//{
-    //SDL_Rect **modes, *mode;
-    //int i, diffw[ 2 ], diffh[ 2 ];
-
-    ////get list of modes from sdl
-    //modes = SDL_ListModes( NULL, flags2 );
-    //*w = *h = 0;
-
-    ////if nothing returned
-    //if ( modes == (SDL_Rect**)0 ) {
-    //    log_printf( "find_video_mode:  fatal error:  no modes available\n" );
-    //    return( 1 );
-    //}
-
-    ////see if any mode is available (windowed mode)
-    //if ( modes == (SDL_Rect**)-1 ) {
-    //    log_printf( "find_video_mode:  all resolutions available\n" );
-    //    *w = wantw;
-    //    *h = wanth;
-    //    return( 0 );
-    //}
-
-    ////output modes
-    //log_printf( "find_video_mode:  available modes:\n" );
-    //for ( i = 0; modes[ i ]; i++ ) {
-    //    log_printf( "find_video_mode:    %d x %d\n", modes[ i ]->w, modes[ i ]->h );
-    //}
-
-    ////search for closest video mode
-    //for ( mode = 0, i = 0; modes[ i ]; i++ ) {
-    //    if ( modes[ i ]->w >= wantw && modes[ i ]->h >= wanth ) {
-    //        if ( mode == 0 ) {
-    //            mode = modes[ i ];
-    //        }
-    //        else {
-    //            diffw[ 0 ] = absolute_value( mode->w - wantw );
-    //            diffh[ 0 ] = absolute_value( mode->h - wanth );
-    //            diffw[ 1 ] = absolute_value( modes[ i ]->w - wantw );
-    //            diffh[ 1 ] = absolute_value( modes[ i ]->h - wanth );
-    //            if ( ( diffw[ 1 ] + diffh[ 1 ] ) < ( diffw[ 0 ] + diffh[ 0 ] ) ) {
-    //                mode = modes[ i ];
-    //            }
-    //        }
-    //    }
-    //}
-
-    ////if a mode was found set the return variables
-    //if ( mode ) {
-    //    *w = mode->w;
-    //    *h = mode->h;
-    //}
-
-    //return( 0 );
-//}
-
 static int get_desktop_bpp()
 {
     //const SDL_VideoInfo *vi = SDL_GetVideoInfo();
@@ -173,27 +117,25 @@ int video_init()
     memset( palettecache32, 0, 256 * sizeof( u32 ) );
 
     //set screen info
-    //flags &= ~SDL_FULLSCREEN;
-    //flags |= config_get_bool( "video.fullscreen" ) ? SDL_FULLSCREEN : 0;
+    bool fullscreen = config_get_bool( "video.fullscreen" );
+    
     screenscale = config_get_int( "video.scale" );
 
     //fullscreen mode
-    //if ( flags & SDL_FULLSCREEN ) {
-    //    screenscale = ( screenscale < 2 ) ? 2 : screenscale;
-    //    screenbpp = 32;
-    //}
-
+    if ( fullscreen ) {
+        screenscale = ( screenscale < 2 ) ? 2 : screenscale;
+        screenbpp = 32;
+    }
     //windowed mode
-//    else {
-    screenbpp = get_desktop_bpp();
-    //  }
+    else {
+        screenbpp = get_desktop_bpp();
+    }
 
-      //initialize the video filters
+    //initialize the video filters
     filter_init();
 
     //get pointer to video filter
-    //filter = filter_get( ( screenscale == 2 ) ? F_NONE : filter_get_int( config_get_string( "video.filter" ) ) );
-    filter = filter_get( ( screenscale == 2 ) ? F_NONE : filter_get_int( "ntsc" ) );
+    filter = filter_get( ( screenscale == 2 ) ? F_NONE : filter_get_int( config_get_string( "video.filter" ) ) );
 
     if ( find_drawfunc( screenscale, screenbpp ) != 0 ) {
         log_printf( "video_init:  error finding appropriate draw func, using draw1x\n" );
@@ -205,24 +147,14 @@ int video_init()
     screenw = filter->minwidth / filter->minscale * screenscale;
     screenh = filter->minheight / filter->minscale * screenscale;
 
-    //fullscreen mode
-    //if ( flags & SDL_FULLSCREEN ) {
-        //int w, h;
-
-        //if ( find_video_mode( screenw, screenh, flags | SDL_FULLSCREEN, &w, &h ) == 0 ) {
-        //    screenw = w;
-        //    screenh = h;
-        //    log_printf( "video_init:  best display mode:  %d x %d\n", w, h );
-        //}
-    //}
-
     //initialize surface/window
-    //sdl2video_init();
+
+    sdl2video_openWindow( screenw, screenh, fullscreen );
+
     sdl2video_getSurfaceInfo( &rshift, &gshift, &bshift, &rloss, &gloss, &bloss );
-    //get_surface_info();
 
     //allocate memory for temp screen buffer
-    screen = (u32*)mem_realloc( screen, 256 * ( 240 + 16 ) * ( screenbpp / 8 ) * 4 );
+    screen = sdl2video_getSurfacePixels();
 
     //print information
     log_printf( "video initialized:  %dx%dx%d %s\n", sdl2video_getWindowWidth(), sdl2video_getWindowHeight(), sdl2video_getWindowBPP(), "poop" );
@@ -234,17 +166,12 @@ void video_kill()
 {
     filter_kill();
 
-    sdl2video_done();
-
-    if ( screen ) {
-        mem_free( screen );
-    }
+    sdl2video_closeWindow();
 
     if ( nesscreen ) {
         mem_free( nesscreen );
     }
 
-    screen = 0;
     nesscreen = 0;
 }
 

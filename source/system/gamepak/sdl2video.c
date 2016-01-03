@@ -6,24 +6,36 @@ sdl2video_data_type sdl2video_data = { 0 };
 #define HEIGHT 240
 
 /*********************************************/
+
 int sdl2video_init()
 {
-    //surface = SDL_SetVideoMode( screenw, screenh, screenbpp, flags );
-    //SDL_WM_SetCaption( "nesemu2", NULL );
     if ( SDL_Init( SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK ) ) {
         printf( "error at sdl init!\n" );
         return 1;
     }
+
     if ( SDL_NumJoysticks() > 0 ) {
         SDL_JoystickEventState( SDL_ENABLE );
         sdl2video_data.joystick = SDL_JoystickOpen( 0 );
     }
 
-    sdl2video_data.window = SDL_CreateWindow( "Fuck you",
-                                              SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                              1920, 1080,
-                                              SDL_WINDOW_FULLSCREEN | 
-                                              SDL_WINDOW_OPENGL );
+    return 0;
+}
+
+int sdl2video_openWindow( int width, int height, bool fullscreen )
+{
+    if ( fullscreen ) {
+        sdl2video_data.window = SDL_CreateWindow( "nesemu2",
+                                                  SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                                                  0, 0,
+                                                  SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_OPENGL );
+    }
+    else {
+        sdl2video_data.window = SDL_CreateWindow( "nesemu2",
+                                                  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                                  width, height,
+                                                  SDL_WINDOW_OPENGL );
+    }
 
     if ( sdl2video_data.window == 0 ) {
         return 1;
@@ -59,13 +71,23 @@ int sdl2video_init()
 }
 
 /*********************************************/
-void sdl2video_done()
+void sdl2video_closeWindow()
 {
-    SDL_ShowCursor( 1 );
     SDL_FreeSurface( sdl2video_data.surface );
+
     SDL_DestroyTexture( sdl2video_data.texture );
     SDL_DestroyRenderer( sdl2video_data.renderer );
     SDL_DestroyWindow( sdl2video_data.window );
+}
+
+/*********************************************/
+void sdl2video_done()
+{
+    SDL_ShowCursor( 1 );
+
+    if ( SDL_JoystickGetAttached( sdl2video_data.joystick ) )
+        SDL_JoystickClose( sdl2video_data.joystick );
+
     SDL_Quit();
 }
 
@@ -146,11 +168,4 @@ void sdl2video_unlock()
     SDL_RenderCopy( sdl2video_data.renderer, sdl2video_data.texture, NULL, NULL );
     SDL_RenderPresent( sdl2video_data.renderer );
     SDL_UnlockSurface( sdl2video_data.surface );
-}
-
-/*********************************************/
-void sdl2video_closeJoystick()
-{
-    if ( SDL_JoystickGetAttached( sdl2video_data.joystick ) )
-        SDL_JoystickClose( sdl2video_data.joystick );
 }
