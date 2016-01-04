@@ -64,6 +64,8 @@ void input_kill()
 
 void input_poll()
 {
+    SDL_PumpEvents();
+
     Uint8 *keystate = SDL_GetKeyboardState( NULL );
     int i, x, y;
 
@@ -76,6 +78,7 @@ void input_poll()
     //decode the key/mouse data into the correct input for the nes
     for ( i = 0; i < 300; i++ )
         joykeys[ i ] = keystate[ i ];
+
 
     //put joypad buttons in the struct
     for ( i = 0; i < 20; i++ ) {
@@ -117,6 +120,7 @@ void input_update_config()
     joyconfig[ 0 ][ 5 ] = config_get_int( "input.joypad0.down" );
     joyconfig[ 0 ][ 6 ] = config_get_int( "input.joypad0.left" );
     joyconfig[ 0 ][ 7 ] = config_get_int( "input.joypad0.right" );
+
     joyconfig[ 1 ][ 0 ] = config_get_int( "input.joypad1.a" );
     joyconfig[ 1 ][ 1 ] = config_get_int( "input.joypad1.b" );
     joyconfig[ 1 ][ 2 ] = config_get_int( "input.joypad1.select" );
