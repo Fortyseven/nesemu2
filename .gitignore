@@ -1,5 +1,6 @@
 *.o
 *.obj
+*.nes
 *.suo
 *.bin
 *.aps
@@ -9,6 +10,7 @@
 *.psess
 *.ncb
 *.suo
+*.*~
 nesemu2
 nesemu2*.exe
 nesemu2.log
