@@ -2,8 +2,8 @@
 
 sdl2video_data_type sdl2video_data = { 0 };
 
-#define WIDTH 256
-#define HEIGHT 240
+#define NES_SCREEN_WIDTH 256
+#define NES_SCREEN_HEIGHT 240
 
 /*********************************************/
 
@@ -24,6 +24,11 @@ int sdl2video_init()
 
 int sdl2video_openWindow( int width, int height, bool fullscreen )
 {
+
+    if ( SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" ) < 0 ) {
+        return 1;
+    }
+
     if ( fullscreen ) {
         sdl2video_data.window = SDL_CreateWindow( "nesemu2",
                                                   SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -37,6 +42,7 @@ int sdl2video_openWindow( int width, int height, bool fullscreen )
                                                   SDL_WINDOW_OPENGL );
     }
 
+
     if ( sdl2video_data.window == 0 ) {
         return 1;
     }
@@ -46,9 +52,12 @@ int sdl2video_openWindow( int width, int height, bool fullscreen )
         return 1;
     }
 
-    sdl2video_data.texture = SDL_CreateTexture( sdl2video_data.renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT );
+    sdl2video_data.texture = SDL_CreateTexture( sdl2video_data.renderer,
+                                                SDL_PIXELFORMAT_ARGB8888,
+                                                SDL_TEXTUREACCESS_STREAMING,
+                                                NES_SCREEN_WIDTH, NES_SCREEN_HEIGHT );
 
-    sdl2video_data.surface = SDL_CreateRGBSurface( 0, WIDTH, HEIGHT, 32,
+    sdl2video_data.surface = SDL_CreateRGBSurface( 0, NES_SCREEN_WIDTH, NES_SCREEN_HEIGHT, 32,
                                                    0x00FF0000,
                                                    0x0000FF00,
                                                    0x000000FF,
@@ -58,12 +67,11 @@ int sdl2video_openWindow( int width, int height, bool fullscreen )
         return 1;
     }
 
-    SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "linear" );
-    SDL_RenderSetLogicalSize( sdl2video_data.renderer, 640, 480 );
+
+    SDL_RenderSetLogicalSize( sdl2video_data.renderer, NES_SCREEN_WIDTH, NES_SCREEN_HEIGHT );
 
     SDL_SetRenderDrawColor( sdl2video_data.renderer, 0, 0, 0, 255 );
     SDL_RenderClear( sdl2video_data.renderer );
-
 
     SDL_ShowCursor( 0 );
 

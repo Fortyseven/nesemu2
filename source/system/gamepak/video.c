@@ -123,7 +123,7 @@ int video_init()
 
     //fullscreen mode
     if ( fullscreen ) {
-        screenscale = ( screenscale < 2 ) ? 2 : screenscale;
+        //screenscale = ( screenscale < 2 ) ? 2 : screenscale;
         screenbpp = 32;
     }
     //windowed mode
@@ -191,8 +191,6 @@ void video_endframe()
     u64 t;
 
     //draw everything
-    //drawfunc( surface->pixels, surface->pitch, screen, 256 * 4, 256, 240 );
-    //console_draw( (u32*)surface->pixels, surface->pitch, screenh );
     drawfunc( sdl2video_getSurfacePixels(), sdl2video_getSurfacePitch(), screen, 256 * 4, 256, 240 );
     //console_draw( (u32*)sdl2video_getSurfacePixels(), sdl2video_getSurfacePitch(), screenh );
 

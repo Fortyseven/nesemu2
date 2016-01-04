@@ -109,19 +109,24 @@ void system_checkevents()
     console_update();
 
     //check for system key presses
-    checkkey( SDLK_ESCAPE, 0, E_QUIT );
-    //checkkey( SDLK_F1, 1, E_TOGGLERUNNING );
-    //checkkey( SDLK_F4, 2, E_TOGGLEFULLSCREEN );
-    //checkkey( SDLK_F5, 3, E_SAVESTATE );
-    //checkkey( SDLK_F8, 4, E_LOADSTATE );
-    //checkkey( SDLK_F9, 5, E_FLIPDISK );
+    checkkey( SDL_SCANCODE_ESCAPE, 0, E_QUIT );
+    checkkey( SDL_SCANCODE_F1, 1, E_TOGGLERUNNING );
+    checkkey( SDL_SCANCODE_F4, 2, E_TOGGLEFULLSCREEN );
+    checkkey( SDL_SCANCODE_F5, 3, E_SAVESTATE );
+    checkkey( SDL_SCANCODE_F8, 4, E_LOADSTATE );
+    checkkey( SDL_SCANCODE_F9, 5, E_FLIPDISK );
 
-    //	checkkey(SDLK_p,			1,		E_SOFTRESET);
-    //	checkkey(SDLK_o,			2,		E_HARDRESET);
-    //	checkkey(SDLK_F3,			4,		E_PLAYMOVIE);
-    //	checkkey(SDLK_F6,			7,		E_RECORDMOVIE);
-    //	checkkey(SDLK_F7,			8,		E_STOPMOVIE);
-    //	checkkey(SDLK_F10,		11,	E_DUMPDISK);
+    if ( joykeys[ SDL_SCANCODE_LALT ] && joykeys[ SDL_SCANCODE_RETURN ] ) {
+        emu_event( E_TOGGLEFULLSCREEN, NULL );
+    }
+
+
+    //	checkkey(SDL_SCANCODE_p,			1,		E_SOFTRESET);
+    //	checkkey(SDL_SCANCODE_o,			2,		E_HARDRESET);
+    //	checkkey(SDL_SCANCODE_F3,			4,		E_PLAYMOVIE);
+    //	checkkey(SDL_SCANCODE_F6,			7,		E_RECORDMOVIE);
+    //	checkkey(SDL_SCANCODE_F7,			8,		E_STOPMOVIE);
+    //	checkkey(SDL_SCANCODE_F10,		11,	E_DUMPDISK);
 }
 
 char *system_getcwd()
